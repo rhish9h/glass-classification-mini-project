@@ -6,20 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <title>index</title>
-  <style>
+  <!-- <style>
     body {
       background-image: url('/static/images/wh_back.jpg');
       background-color: rgba(255, 255, 255, 0.664);
       background-blend-mode: lighten;
     }
-  </style>
+  </style> -->
 </head>
 <body>
   {% block content %}
     <!-- navbar -->
     <div class="container-fluid">
       <!-- As a link -->
-      <nav class="navbar navbar-light h1 py-3 transparent" id="glass_navbar">
+      <nav class="navbar navbar-light bg-light h1 py-3" id="glass_navbar">
           <a class="navbar-brand" href="">Glass Classification</a>
           <a href="graphs">
             <button type="button" class="btn btn-dark float-right">Graphs</button>
@@ -27,17 +27,18 @@
       </nav>
     </div>
 
-    <hr>
 
     <!-- form container -->
-    <div class="container" id='attributes_container'>
+    <form action="" method="POST">
+        {% csrf_token %}
+    <div class="container mt-5" id='attributes_container'>
       <!-- row 1 -->
       <div class="form-row justify-content-md-center mt-2">
         <!-- col 1 -->
           <div class="col">
               <div class="form-group mx-2">
                 <label for="ri">Refractive Index</label>
-                <input type="number" class="form-control form-control-sm" id='ri'>
+                <input type="number" class="form-control form-control-sm" id='ri' name="ri" step='any'>
               </div>
           </div>
       </div>
@@ -48,7 +49,7 @@
             <div class="col">
                 <div class="form-group mx-2">
                   <label for="na">Sodium</label>
-                  <input type="number" class="form-control form-control-sm" id='na'>
+                  <input type="number" class="form-control form-control-sm" id='na' name="na" step='any'>
                 </div>
             </div>
 
@@ -56,7 +57,7 @@
             <div class="col">
                 <div class="form-group mx-2">
                   <label for="mg">Magnesium</label>
-                  <input type="number" class="form-control form-control-sm" id='mg'>
+                  <input type="number" class="form-control form-control-sm" id='mg' name="mg" step='any'>
                 </div>
             </div>
 
@@ -64,7 +65,7 @@
             <div class="col">
                 <div class="form-group mx-2">
                   <label for="al">Aluminium</label>
-                  <input type="number" class="form-control form-control-sm" id='al'>
+                  <input type="number" class="form-control form-control-sm" id='al' name="al" step='any'>
                 </div>
             </div>
 
@@ -72,13 +73,66 @@
             <div class="col">
                 <div class="form-group mx-2">
                   <label for="si">Silicon</label>
-                  <input type="number" class="form-control form-control-sm" id='si'>
+                  <input type="number" class="form-control form-control-sm" id='si' name="si" step='any'>
                 </div>
             </div>
         </div>
 
+        <!-- row 3 -->
+      <div class="form-row justify-content-md-center mt-2">
+
+        <!-- col 1 -->
+        <div class="col">
+            <div class="form-group mx-2">
+              <label for="k">Potassium</label>
+              <input type="number" class="form-control form-control-sm" id='k' name="k" step='any'>
+            </div>
+        </div>
+
+        <!-- col 2 -->
+        <div class="col">
+            <div class="form-group mx-2">
+              <label for="ca">Calcium</label>
+              <input type="number" class="form-control form-control-sm" id='ca' name="ca" step='any'>
+            </div>
+        </div>
+
+        <!-- col 3 -->
+        <div class="col">
+            <div class="form-group mx-2">
+              <label for="ba">Barium</label>
+              <input type="number" class="form-control form-control-sm" id='ba' name="ba" step='any'>
+            </div>
+        </div>
+
+        <!-- col 4 -->
+        <div class="col">
+            <div class="form-group mx-2">
+              <label for="fe">Iron</label>
+              <input type="number" class="form-control form-control-sm" id='fe' name="fe" step='any'>
+            </div>
+        </div>
+        <!-- end of row 3 -->
+      </div>
+
+      <hr>
+
+      <!-- row 4 -->
+      <div class="form-row justify-content-md-center mt-3">
+        <!-- submit button -->
+        <button type="submit" class="btn btn-primary">Classify</button>
+      <!-- end of row 4 -->
+      </div>
+      </form>
       <!-- end of form container -->
     </div>
+
+    <center>
+      {% if form_data %}
+        {{form_data}}
+        {{ip_values}}
+      {% endif %}
+    </center>
   {% endblock %}
 
 </body>
