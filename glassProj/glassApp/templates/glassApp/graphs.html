@@ -14,11 +14,22 @@
     <div class="container-fluid">
       <!-- As a link -->
       <nav class="navbar navbar-light bg-light h1 py-3" id="glass_navbar">
-          <a class="navbar-brand" href="index">Glass Classification</a>
-          <a href="graphs">
-            <button type="button" class="btn btn-dark float-right">Graphs</button>
-          </a>
-        </nav>
+        <a class="navbar-brand" href="index">Glass Classification</a>
+        <a href="graphs">
+          <button type="button" class="btn btn-dark float-right">Graphs</button>
+        </a>
+      </nav>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">K-means clustering</h5>
+          <p class="card-text">k-means clustering aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean, serving as a prototype of the cluster.</p>
+          <div>
+            <img src="\static\images\kmeans_2d.png" alt="k-means cluster">
+          </div>
+        </div>
+      </div>
+
       </div>
     {% endblock %}
 

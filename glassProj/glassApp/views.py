@@ -98,7 +98,21 @@ def index(request):
       except:
         ip_values.append(0)
 
-    return render(request, 'glassApp/index.html', {'form_data': form_data, 'ip_values': ip_values})
+    # predict values
+    glassType = {
+      1: 'building_windows_float_processed',
+      2: 'building_windows_non_float_processed', 
+      3: 'vehicle_windows_float_processed', 
+      4: 'vehicle_windows_non_float_processed', 
+      5: 'containers', 
+      6: 'tableware', 
+      7: 'headlamps'
+    }
+    
+    prediction_key = knn.predict([ip_values])
+    prediction = glassType[prediction_key]
+
+    return render(request, 'glassApp/index.html', {'form_data': form_data, 'ip_values': ip_values, 'prediction': prediction})
     #  --------------------------------------------------------------------------------------get
   else:
     return render(request, 'glassApp/index.html')
