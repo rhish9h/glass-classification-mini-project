@@ -11,7 +11,7 @@ class Testcal(unittest.TestCase):
   def test_accur(self):
       cal = KNN(3, 'euclidean')
       result=cal.accur('euclidean')
-      self.assertEqual(result,0.83644)
+      self.assertEqual(round(result, 5),0.83645)
 
   def test_result_knn(self):
       cal = KNN(3, 'euclidean')
