@@ -5,5 +5,6 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('index', views.index, name='index'),
-    path('graphs', views.graphs, name='graphs')
+    path('graphs', views.graphs, name='graphs'),
+    path('genKmeans', views.genKmeans, name='genKmeans'),
 ]

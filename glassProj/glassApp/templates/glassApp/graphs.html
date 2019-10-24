@@ -24,9 +24,26 @@
         <div class="card-body">
           <h5 class="card-title">K-means clustering</h5>
           <p class="card-text">k-means clustering aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean, serving as a prototype of the cluster.</p>
-          <div>
-            <img src="\static\images\kmeans_2d.png" alt="k-means cluster 2d" width="500" height="500">
-            <img src="\static\images\3dkmeansimg.png" alt="k-means cluster 3d" width="500" height="500">
+          <div class="row">
+            <div class="col">
+              <img src="\static\images\kmeans_2d.png" alt="k-means cluster 2d" width="500" height="500">
+            </div>
+            <div class="col">
+              <img src="\static\images\3dkmeansimg.png" alt="k-means cluster 3d" width="500" height="500">
+            </div>
+            <div class="col" style="margin-top: 10em;">
+                {% csrf_token %}
+                <form action="genKmeans">
+                  <div class="row">
+                    <div class="col mt-1">
+                      <input type="number" class="form-control form-control-sm" id="kmeansK" name="kmeansK" placeholder="enter value of K" min="1">                      
+                    </div>
+                    <div class="col">
+                      <button type="submit" class="btn btn-success" id="genKmeans_button">Try different K</button>
+                    </div>
+                  </div>
+                </form>
+            </div>
           </div>
         </div>
       </div>
