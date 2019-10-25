@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np 
 import os
 
-for dirname, _, filenames in os.walk('glass.csv'):
+for dirname, _, filenames in os.walk('glass_os.csv'):
     for filename in filenames:
         print(os.path.join(dirname, filename))
 
@@ -17,23 +17,35 @@ class KNN:
         self.d_metric = d_metric
         self.d_metric_to_fn = {
             'euclidean': self.euclidean,
-            
+            'manhattan': self.manhattan,
+            'minkowski': self.minkowski
         }
         self.p = p
-        self.data = pd.read_csv("glass.csv")
+        self.data = pd.read_csv("glass_os.csv")
+        # Remove first columns as index base 
+        self.data.drop(self.data.columns[[0]], axis = 1, inplace = True)
         self.labels = self.data.pop("Type").values
         self.data = self.data.values
         self.labels = self.labels.reshape(-1, 1)
         self.fit(self.data, self.labels)
 
-
     def fit(self, X, y):
         self.X = np.copy(X)
         self.y = np.copy(y)
 
+    def manhattan(self, x_test):
+        return np.sum(np.abs(self.X - x_test), axis=-1)
+
     def euclidean(self, x_test):
         sq_diff = (self.X - x_test) ** 2
         return np.sqrt(np.sum(sq_diff, axis=-1))
+
+    def minkowski(self, x_test):
+        abs_diff = np.abs(self.X - x_test)
+        sum_p_diff = np.sum(abs_diff ** self.p, axis=-1)
+        pth_root = sum_p_diff ** (1 / self.p)
+
+        return pth_root
  
 
         
@@ -49,6 +61,7 @@ class KNN:
         k_sorted_labels = sorted_labels[:self.k]
         unique_labels, counts = np.unique(k_sorted_labels, return_counts=True)
         pred1 = unique_labels[np.argmax(counts)]
+
         return pred1
     
     
