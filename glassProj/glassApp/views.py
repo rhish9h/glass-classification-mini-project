@@ -11,6 +11,8 @@ modulePath = os.path.dirname(__file__)
 # ----------------------------------------------------------------------------------------knn
 
 data = pd.read_csv(os.path.join(modulePath, 'glass_os.csv'))
+# Remove first columns as index base 
+data.drop(data.columns[[0]], axis = 1, inplace = True)
 labels = data.pop("Type").values
 data = data.values
 labels = labels.reshape(-1, 1)
@@ -266,3 +268,6 @@ def genKmeans(request):
   draw2dgraph(kmeansK_ip)
   draw3dgraph(kmeansK_ip)
   return render(request, 'glassApp/genKmeans.html', {'kmeansK_ip': kmeansK_ip})
+
+def about(request):
+  return render(request, 'glassApp/about.html')

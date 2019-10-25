@@ -6,23 +6,27 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <title>index</title>
-  <!-- <style>
+  <style>
     body {
-      background-image: url('/static/images/wh_back.jpg');
-      background-color: rgba(7, 205, 255, 0.664);
-      background-blend-mode: lighten;
+      background-image: url('/static/images/glass-building.jpg');
+      /* background-size: 1530px 700px; */
+      /* background-color: rgba(7, 205, 255, 0.664);
+      background-blend-mode: lighten; */
     }
-  </style> -->
+  </style>
 </head>
 <body>
   {% block content %}
     <!-- navbar -->
     <div class="container-fluid">
       <!-- As a link -->
-      <nav class="navbar navbar-light bg-light h1 py-3" id="glass_navbar">
-          <a class="navbar-brand" href="" id='glass_heading'>Glass Classification</a>
+      <nav class="navbar transparent navbar-light h1 py-3" id="glass_navbar">
           <a href="graphs">
-            <button type="button" class="btn btn-dark float-right" id='graph_button'>Graphs</button>
+            <button type="button" class="btn btn-dark" id='graph_button'>Graphs</button>
+          </a>
+          <a class="navbar-brand" href="" id='glass_heading'>Glass Classification</a>
+          <a href="about">
+            <button type="button" class="btn btn-dark" id='about_button'>About</button>
           </a>
       </nav>
     </div>
@@ -131,12 +135,12 @@
       {% if form_data %}
         
         <br>
-        <div class="alert alert-success" role="alert">
+        <div>
           <h1 class="alert-heading">{{prediction}}</h1>
           <hr>
           <h6>Details:</h6>
           <div class="mt-2 container">
-            <table class="table table-striped small">
+            <table class="table-sm table-striped small table-dark" style="width: 30em;">
               <thead class="thead-dark">
                 <tr>
                   <th>Parameter</th>

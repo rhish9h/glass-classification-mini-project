@@ -7,4 +7,5 @@ urlpatterns = [
     path('index', views.index, name='index'),
     path('graphs', views.graphs, name='graphs'),
     path('genKmeans', views.genKmeans, name='genKmeans'),
+    path('about', views.about, name='about'),
 ]

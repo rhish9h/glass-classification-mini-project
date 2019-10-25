@@ -17,10 +17,36 @@ class SelTest(StaticLiveServerTestCase):
     return self.browser.quit()
     super(SelTest, self).tearDown()
   
-  # def test_foo(self):
-  #   self.assertEquals(0, 1)
+  def random_value_form_check(self):
+    # self.browser.get('http://localhost:8000') # open website
+    # time.sleep(0.5)
+    elements = ['ri', 'na', 'mg', 'al', 'si', 'k', 'ca', 'ba', 'fe']
+    for i in elements:
+      ri = self.browser.find_element_by_id(i) # send key to ri
+      ri.click() # focus on input box
+      ri.send_keys(str(random.uniform(0, 100))) # send random float value in range 0, 100 both inclusive, depending on rounding
+    time.sleep(0.5)
+    self.browser.find_element_by_id('submit_button').click() # click submit button
+    time.sleep(2)
+  
+  def about_page_linking(self):
+    self.browser.get('http://localhost:8000') # open website
+    time.sleep(0.5)
+    self.browser.find_element_by_id('about_button').click() # click on about button
+    time.sleep(0.5)
+    self.browser.find_element_by_id('about_button').click() # click on about button
+    time.sleep(0.5)
+    self.browser.find_element_by_id('glass_heading').click() # click on home button
+    time.sleep(0.5)
+    self.browser.find_element_by_id('about_button').click() # click on about button
+    time.sleep(0.5)
+    self.browser.find_element_by_id('graph_button').click() # click on graph button
+    time.sleep(0.5)
+    self.browser.find_element_by_id('glass_heading').click() # click on home button
+    time.sleep(0.5)
 
   def graph_page_linking(self):
+    self.browser.maximize_window()
     self.browser.get('http://localhost:8000') # open website
     time.sleep(0.5)
     self.browser.find_element_by_id('graph_button').click() # click on graph button
@@ -29,21 +55,19 @@ class SelTest(StaticLiveServerTestCase):
     time.sleep(0.5)
     self.browser.find_element_by_id('glass_heading').click() # click on home button
     time.sleep(0.5)
-  
-  def random_value_form_check(self):
-    # self.browser.get('http://localhost:8000') # open website
-    # time.sleep(0.5)
-
-    elements = ['ri', 'na', 'mg', 'al', 'si', 'k', 'ca', 'ba', 'fe']
-
-    for i in elements:
-      ri = self.browser.find_element_by_id(i) # send key to ri
-      ri.click() # focus on input box
-      ri.send_keys(str(random.uniform(0, 100))) # send random float value in range 0, 100 both inclusive, depending on rounding
-
+    self.browser.find_element_by_id('graph_button').click() # click on graph button
     time.sleep(0.5)
-    self.browser.find_element_by_id('submit_button').click() # click submit button
+    self.browser.find_element_by_id('about_button').click() # click on about button
+    time.sleep(0.5)
+    self.browser.find_element_by_id('graph_button').click() # click on graph button
+    time.sleep(0.5)
+    ri = self.browser.find_element_by_id('kmeansK') # send key to ri
+    ri.click() # focus on input box
+    ri.send_keys(str(random.randint(1, 10))) # send random float value in range 0, 100 both inclusive, depending on rounding
+    self.browser.find_element_by_id('genKmeans_button').click() # click on genKmeans button
     time.sleep(2)
+    self.browser.find_element_by_id('glass_heading').click() # click on home button
+    time.sleep(0.5)
 
   def test_all_together(self):
     self.graph_page_linking()

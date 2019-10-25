@@ -12,23 +12,36 @@
   <div class="container-fluid">
     <!-- Navbar -->
     <nav class="navbar navbar-light bg-light h1 py-3" id="glass_navbar">
-      <a class="navbar-brand" href="index" id='glass_heading'>Glass Classification</a>
-      <a href="graphs">
-        <button type="button" class="btn btn-dark float-right" id='graph_button'>Graphs</button>
-      </a>
+        <a href="graphs">
+          <button type="button" class="btn btn-dark" id='graph_button'>Graphs</button>
+        </a>
+        <a class="navbar-brand" href="index" id='glass_heading'>Glass Classification</a>
+        <a href="about">
+          <button type="button" class="btn btn-dark" id='about_button'>About</button>
+        </a>
     </nav>
   </div>
   <div class="container">
-    <div class="row">
+    <div class="row mt-4">
       <div class="col-sm">
-        <img src="\static\images\3dbuf.png" width="500" height="500"/>
+        <div class="card">
+          <img src="\static\images\3dbuf.png" width="500" height="500"/>
+          <div class="card-body">
+            <h5 class="card-text">3d Cluster k={{kmeansK_ip}}</h5>
+          </div>
+        </div>
       </div>
       <div class="col-sm">
-        <img src="\static\images\2dbuf.png" width="500" height="500"/>
+        <div class="card">
+          <img src="\static\images\2dbuf.png" width="500" height="500"/>
+          <div class="card-body">
+            <h5 class="card-text">2d Cluster k={{kmeansK_ip}}</h5>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-{{kmeansK_ip}}
+
   {% endblock %}
 </body>
 </html>
