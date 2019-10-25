@@ -10,7 +10,7 @@ from django.http import HttpResponse
 modulePath = os.path.dirname(__file__)
 # ----------------------------------------------------------------------------------------knn
 
-data = pd.read_csv(os.path.join(modulePath, 'glass.csv'))
+data = pd.read_csv(os.path.join(modulePath, 'glass_os.csv'))
 labels = data.pop("Type").values
 data = data.values
 labels = labels.reshape(-1, 1)
@@ -136,6 +136,7 @@ def draw2dgraph(kvalue):
 
   K = 7 if kvalue <= 0 else kvalue
   n_iter = 100
+  # Centroids = 0
   Centroids = np.array([]).reshape(n, 0)
 
   for i in range(K):
@@ -172,17 +173,23 @@ def draw2dgraph(kvalue):
       Output = Y
 
   color = ['red', 'blue', 'green', 'cyan', 'magenta', 'yellow', 'black']
-  labels = ['bw_fp', 'bw_nfp', 'v', 'v_nfp', 'containers', 'tableware', 'headlamps']
+
+  if kvalue > 7: #create colors list for more than 7 K
+    number_of_colors = kvalue
+    color = ["#"+''.join([rd.choice('0123456789ABCDEF') for j in range(6)]) for i in range(number_of_colors)]
+
+  # labels = ['bw_fp', 'bw_nfp', 'v', 'v_nfp', 'containers', 'tableware', 'headlamps']
   # ------------------------------------------------------------------------------------2d
 
+  plt.clf()
   for k in range(K):
-      plt.scatter(Output[k + 1][:, 0], Output[k + 1][:, 1], c=color[k], label=labels[k])
+      plt.scatter(Output[k + 1][:, 0], Output[k + 1][:, 1], c=color[k])
   plt.scatter(Centroids[0, :], Centroids[1, :], s=100, c='grey', label='Centroids')
   plt.xlabel('RI')
   plt.ylabel('Na')
   plt.savefig('assets/images/2dbuf', dpi = 150)
 
-def draw3dgraph():
+def draw3dgraph(kvalue):
   import pandas as pd
   import numpy as np
   import matplotlib.pyplot as plt
@@ -196,7 +203,7 @@ def draw3dgraph():
   m = X.shape[0]  # number of training examples
   n = X.shape[1]  # number of features. Here n=2n_iter=100
 
-  K = 7
+  K = 7 if kvalue <= 0 else kvalue
   n_iter = 100
   Centroids = np.array([]).reshape(n, 0)
 
@@ -234,13 +241,18 @@ def draw3dgraph():
       Output = Y
 
   color = ['red', 'blue', 'green', 'cyan', 'magenta', 'yellow', 'black']
-  labels = ['bw_fp', 'bw_nfp', 'v', 'v_nfp', 'containers', 'tableware', 'headlamps']
+  if kvalue > 7: #create colors list for more than 7 K
+    number_of_colors = kvalue
+    color = ["#"+''.join([rd.choice('0123456789ABCDEF') for j in range(6)]) for i in range(number_of_colors)]
+
+  # labels = ['bw_fp', 'bw_nfp', 'v', 'v_nfp', 'containers', 'tableware', 'headlamps']
   from mpl_toolkits.mplot3d import Axes3D
 
+  plt.clf()
   fig = plt.figure()
   ax = fig.add_subplot(111, projection='3d')
   for k in range(K):
-      ax.scatter(Output[k + 1][:, 0], Output[k + 1][:, 1], c=color[k], label=labels[k])
+      ax.scatter(Output[k + 1][:, 0], Output[k + 1][:, 1], c=color[k])
   ax.scatter(Centroids[0, :], Centroids[1, :], s=100, c='grey', label='Centroids')
 
   ax.set_xlabel('RI')
@@ -252,5 +264,5 @@ def genKmeans(request):
   kmeansK_ip = request.GET.get('kmeansK', '')
   kmeansK_ip = 7 if kmeansK_ip == '' else int(kmeansK_ip)
   draw2dgraph(kmeansK_ip)
-  # draw3dgraph()
-  return render(request, 'glassApp/genKmeans.html', {'kmeansK_ip': kmeansK_ip, 'test': 1})
+  draw3dgraph(kmeansK_ip)
+  return render(request, 'glassApp/genKmeans.html', {'kmeansK_ip': kmeansK_ip})
