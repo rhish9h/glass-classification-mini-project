@@ -9,6 +9,7 @@
   <style>
     body {
       background-image: url('/static/images/glass-building.jpg');
+      color: aliceblue;
       /* background-size: 1530px 700px; */
       /* background-color: rgba(7, 205, 255, 0.664);
       background-blend-mode: lighten; */
@@ -135,12 +136,12 @@
       {% if form_data %}
         
         <br>
-        <div>
-          <h1 class="alert-heading">{{prediction}}</h1>
+        <div class="alert alert-light" role="alert" style=" background-blend-mode: lighten; background-color: rgba(65, 186, 241, 0.664)">
+          <h1 class="alert-heading" style="color: aliceblue;">Class: {{prediction}}</h1>
           <hr>
-          <h6>Details:</h6>
+          <h6 style="color: aliceblue;">Details:</h6>
           <div class="mt-2 container">
-            <table class="table-sm table-striped small table-dark" style="width: 30em;">
+            <table class="table-sm table-striped small table-dark text-center" style="width: 30em;">
               <thead class="thead-dark">
                 <tr>
                   <th>Parameter</th>
@@ -158,7 +159,8 @@
               {% endfor %}
               </tbody>
             </table>
-            <p>encoded values to the model: </p>{{ip_values}}
+            <p style="color: aliceblue;">encoded values to the model: </p>
+            <p style="color: aliceblue;">{{ip_values}}</p>
           </div>
         </div>
       {% endif %}
