@@ -8,7 +8,12 @@ class Testcal(unittest.TestCase):
       cal = KNN(3, 'euclidean')
       result=cal.predict([[1.51514,14.85,0,2.42,73.72,0,8.39,0.56,0]])
       self.assertEqual(result,7)
- 
+
+  def test_accur(self):
+        cal = KNN(3, 'euclidean')
+        result=cal.accur('euclidean')
+        self.assertGreater(round(result, 5),0.8)
+
   def test_manhattan(self):
       cal = KNN(3, 'manhattan')
       result=cal.manhattan([[ 1.51655, 12.75   ,  2.85   ,  1.44   , 73.27   ,  0.57   ,
