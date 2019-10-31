@@ -21,10 +21,12 @@ class SelTest(StaticLiveServerTestCase):
     # self.browser.get('http://localhost:8000') # open website
     # time.sleep(0.5)
     elements = ['ri', 'na', 'mg', 'al', 'si', 'k', 'ca', 'ba', 'fe']
-    for i in elements:
-      ri = self.browser.find_element_by_id(i) # send key to ri
+    low_limits = [1.51, 10.7, 0, 0.29, 69.8, 0, 5.43, 0, 0]
+    upper_limits = [1.53, 17.4, 4.49, 3.5, 75.4, 6.21, 16.2, 3.15, 0.51]
+    for i in range(len(elements)):
+      ri = self.browser.find_element_by_id(elements[i]) # send key to ri
       ri.click() # focus on input box
-      ri.send_keys(str(random.uniform(0, 100))) # send random float value in range 0, 100 both inclusive, depending on rounding
+      ri.send_keys(str(random.uniform(low_limits[i], upper_limits[i]))) # send random float value in range 0, 100 both inclusive, depending on rounding
     time.sleep(0.5)
     self.browser.find_element_by_id('submit_button').click() # click submit button
     time.sleep(2)

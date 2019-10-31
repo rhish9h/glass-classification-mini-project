@@ -93,13 +93,25 @@ def index(request):
       'fe': request.POST.get('fe', ''),
     }
 
+    default_values = {
+      'ri': 1.51,
+      'na': 10.7,
+      'mg': 0,
+      'al': 0.29,
+      'si': 69.8,
+      'k': 0,
+      'ca': 5.43,
+      'ba': 0,
+      'fe': 0,
+    }
+
+    # form_data['ri'] = form_data['ri'] if not form_data['ri'] == '' else 1.51
+
     # convert form data to array of integers for processing in model
     ip_values = []
     for key, value in form_data.items():
-      try: # for blank values
-        ip_values.append(float(value))
-      except:
-        ip_values.append(0)
+      form_data[key] = form_data[key] if not form_data[key] == '' else default_values[key]
+      ip_values.append(float(form_data[key]))
 
     # predict values
     glassType = {
