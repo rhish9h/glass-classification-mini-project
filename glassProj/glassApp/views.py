@@ -23,6 +23,8 @@ class KNN:
         self.d_metric = d_metric
         self.d_metric_to_fn = {
             'euclidean': self.euclidean,
+            'manhattan': self.manhattan,
+            'minkowski': self.minkowski
         }
         self.p = p
 
@@ -30,10 +32,19 @@ class KNN:
         self.X = np.copy(X)
         self.y = np.copy(y)
 
+    def manhattan(self, x_test):
+        return np.sum(np.abs(self.X - x_test), axis=-1)
+
     def euclidean(self, x_test):
         sq_diff = (self.X - x_test) ** 2
         return np.sqrt(np.sum(sq_diff, axis=-1))
  
+    def minkowski(self, x_test):
+        abs_diff = np.abs(self.X - x_test)
+        sum_p_diff = np.sum(abs_diff ** self.p, axis=-1)
+        pth_root = sum_p_diff ** (1 / self.p)
+        return pth_root
+
     def distance(self, x_test):
         return self.d_metric_to_fn[self.d_metric](x_test)
 
@@ -75,7 +86,7 @@ class KNN:
 # pickle load end
 
 # create model
-knn = KNN(k=3, d_metric='euclidean')
+knn = KNN(k=3, d_metric='manhattan')
 knn.fit(data, labels)
 
 # ------------------------------------------------------------------------index function
